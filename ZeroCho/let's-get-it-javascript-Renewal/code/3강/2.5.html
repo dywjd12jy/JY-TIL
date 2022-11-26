@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="ko">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>2번, 5번 script</title>
+  </head>
+  <body>
+    <div><span id="order">1</span></div>
+    <div>
+      <span id="word">2</span>
+    </div>
+    <input type="text" />
+    <button>입력</button>
+    <script>
+      // 2. prompt, alert, confirm
+      const number = parseInt(prompt("몇 명이 참가하나요?"), 10); // 10 진법
+      alert(number);
+      const YorN = confirm("맞나요?");
+      console.log(YorN); // true
+      // 5. eventlistener
+      document.querySelector("input").addEventListener("input", function () {
+        console.log("글자 입력");
+      });
+      document.querySelector("button").addEventListener("click", function () {
+        console.log("버튼 클릭");
+      });
+    </script>
+  </body>
+</html>
