@@ -4,28 +4,78 @@
     <meta charset="UTF-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link
+      rel="stylesheet"
+      href="https://meyerweb.com/eric/tools/css/reset/reset200802.css"
+    />
+
     <title>2번, 5번 script</title>
   </head>
   <body>
-    <div><span id="order">1</span></div>
-    <div>
-      <span id="word">2</span>
+    <style>
+      .container {
+        width: 100%;
+        height: 100dvh;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: flex-start;
+        padding: 100px 0;
+      }
+      h1 {
+        font-size: 30px;
+        margin-bottom: 10px;
+      }
+      .participant {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+      }
+      .participant > span {
+        margin-bottom: 5px;
+      }
+      #peple-length {
+        display: flex;
+      }
+      #peple-length > span {
+        margin: 0 2px 0 2px;
+      }
+      .text-input {
+        display: none;
+      }
+      .button-start {
+        margin-top: 10px;
+        width: 20%;
+      }
+      .button-start button {
+        width: 100%;
+        padding: 10px 0;
+        font-size: 18px;
+        cursor: pointer;
+      }
+    </style>
+    <div class="container">
+      <h1>끝말잇기</h1>
+      <div class="participant">
+        <span>참가자</span>
+        <p id="peple-length"></p>
+      </div>
+      <!-- <div>
+        <span id="order">1</span>
+        <span id="word">2</span>
+      </div> -->
+      <div class="text-input">
+        <input type="text" />
+        <button>입력</button>
+      </div>
+      <div class="button-start">
+        <button onclick="onStartClick()">시작하기!</button>
+      </div>
+      <div id="start-word">
+        <span>제시어 : </span>
+        <span id="word"></span>
+      </div>
     </div>
-    <input type="text" />
-    <button>입력</button>
-    <script>
-      // 2. prompt, alert, confirm
-      const number = parseInt(prompt("몇 명이 참가하나요?"), 10); // 10 진법
-      alert(number);
-      const YorN = confirm("맞나요?");
-      console.log(YorN); // true
-      // 5. eventlistener
-      document.querySelector("input").addEventListener("input", function () {
-        console.log("글자 입력");
-      });
-      document.querySelector("button").addEventListener("click", function () {
-        console.log("버튼 클릭");
-      });
-    </script>
+    <script src="./2.5.js"></script>
   </body>
 </html>
