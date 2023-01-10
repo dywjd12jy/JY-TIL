@@ -1,10 +1,15 @@
 const PeopleLength = document.getElementById("peple-length");
 
-let People = [];
-let StartText = "";
-let FirstIndex = "";
-let LastIndex = "";
-let TargetIndex = "";
+let people = [];
+let startText = "";
+let firstIndex = "";
+let lastIndex = "";
+let targetIndex = 2;
+
+const getTargetBox = (index) => {
+  return document.querySelector(`.input-box-${index}`);
+};
+
 // 2. prompt, alert, confirm
 const InputNumber = 4;
 // const InputNumber = parseInt(prompt("몇 명이 참가하나요?"), 10); // 10 진법
@@ -12,8 +17,24 @@ const InputNumber = 4;
 // const YorN = confirm(QuestionLength);
 
 for (let i = 1; i <= InputNumber; i++) {
-  People.push(i);
+  people.push(i);
 }
+
+const onAddClick = (value) => {
+  let inputValue = document.querySelector(`.input-box-${value} input`).value;
+  console.log(inputValue);
+  getTargetBox(value).classList.remove("active");
+  // const nextTargetIndex= value === InputNumber ? 1 : value + 1;
+  if (value === InputNumber) {
+    targetIndex = 1;
+  } else {
+    targetIndex = value + 1;
+  }
+  getTargetBox(targetIndex).classList.add("active");
+  document.querySelector(".target-user").innerHTML = targetIndex + "번째 순서";
+  inputValue = "";
+  console.log(inputValue);
+};
 
 const SetInputBox = (value) => {
   const IdTextInput = document.getElementById("text-input");
@@ -23,7 +44,8 @@ const SetInputBox = (value) => {
   const AddButton = document.createElement("button");
   AddBox.setAttribute("class", `input-box-${value}`);
   AddInput.setAttribute("data-input", `${value}`);
-  AddBox.setAttribute("data-button", `${value}`);
+  AddBox.setAttribute("data-box", `${value}`);
+  AddButton.setAttribute("onclick", `onAddClick(${value})`);
   AddH3.innerText = value + "번째";
   AddButton.innerText = "입력";
   AddBox.appendChild(AddH3);
@@ -32,37 +54,42 @@ const SetInputBox = (value) => {
   IdTextInput.appendChild(AddBox);
 };
 
-People.map((value) => {
+people.map((value) => {
   const AddTag = document.createElement("span");
   AddTag.innerHTML = value + "번째";
   PeopleLength.appendChild(AddTag);
-  console.log(AddTag);
+  // console.log(AddTag);
 });
 
 const InputLength = document.querySelectorAll(
   ".input-box-1,.input-box-2,.input-box-3"
 );
-console.log(InputLength);
 
 const Word = document.getElementById("word");
 
 const onStartClick = () => {
-  StartText = prompt("첫번째 순서입니다. 제시어를 입력해주세요.");
-  if (!StartText) {
+  startText = prompt("첫번째 순서입니다. 제시어를 입력해주세요.");
+  if (!startText) {
     alert("제시어를 입력하여 게임을 시작해보세요.");
-    StartText = prompt("제시어를 입력해주세요.");
+    startText = prompt("제시어를 입력해주세요.");
   }
-  if (StartText === "") {
+  if (startText === "") {
     alert("제시어를 입력하여 게임을 시작해보세요.");
-    StartText = prompt("제시어를 입력해주세요.");
+    startText = prompt("제시어를 입력해주세요.");
   } else {
-    Word.innerText = StartText;
-    FirstIndex = StartText.substring(0, 1);
-    LastIndex = StartText.substring(StartText.length - 1, 1);
-    People.map((value) => {
+    Word.innerText = startText;
+    firstIndex = startText.substring(0, 1);
+    lastIndex = startText.substring(startText.length + 1, 1);
+    // console.log(firstIndex);
+    // console.log(lastIndex);
+    people.map((value) => {
       SetInputBox(value);
     });
-    TargetIndex = 2;
+    const targetBox = getTargetBox(targetIndex);
+    targetBox.classList.add("active");
+    document.querySelector(".button-start").classList.add("active");
+    document.querySelector(".target-user").innerHTML =
+      targetIndex + "번째 순서";
   }
 };
 
